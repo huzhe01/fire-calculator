@@ -1,0 +1,84 @@
+[hidden]{display:none!important}
+.view-tabs{display:flex;gap:8px;border-bottom:1px solid var(--border);margin:0 0 25px;padding-bottom:1px;overflow-x:auto}
+.view-tabs button{background:transparent;border:0;border-bottom:3px solid transparent;padding:13px 17px 14px;font-size:15px;white-space:nowrap;cursor:pointer;color:var(--muted);font-weight:550}
+.view-tabs button span{font-size:13px;margin-left:6px;font-weight:400}
+.view-tabs button[aria-selected=true]{color:var(--blue);border-color:var(--blue)}
+.view-tabs button:focus-visible{outline-offset:-3px}
+.fire-view{display:flex;flex-direction:column;gap:20px}
+.fire-view-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.fire-view-heading h2{font-size:21px;font-weight:650;letter-spacing:-.4px;margin:0 0 6px}
+.fire-view-heading p{font-size:14px;color:var(--muted);line-height:1.7}
+.time-pill{color:var(--blue);background:var(--blue-light);padding:8px 13px;border-radius:8px;font-size:14px;font-weight:550;white-space:nowrap}
+.fire-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.fire-metrics .metric{padding:22px}
+.fire-metrics .metric-value{font-size:clamp(26px,2.6vw,36px)}
+.fire-metrics .usd-value{color:var(--blue)}
+.fire-metrics .cny-value{color:#11816f}
+.fire-chart-panel{padding:25px 27px}
+.fire-chart{position:relative;min-height:330px;width:100%;min-width:0}
+.fire-chart svg{display:block;overflow:visible}
+.fire-scrubber{background:#f5f8ff;border:1px solid #e1e9f9;border-radius:10px;padding:13px 17px;margin-top:16px}
+.fire-scrubber>div:first-child{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:7px;font-size:14px}
+.fire-scrubber output{color:var(--blue);font-weight:600}
+.fire-scrubber input[type=range]{height:32px}
+.fire-scrubber-scale{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+.fire-accounts-grid,.fire-settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.fire-control-card{padding:24px 26px}
+.account-heading{display:flex;gap:12px;align-items:center;margin-bottom:25px}
+.account-heading h2{font-size:17px;margin-bottom:5px;font-weight:650}
+.account-heading p{font-size:13px;color:var(--muted);line-height:1.65}
+.currency-token{height:42px;min-width:47px;display:grid;place-items:center;font-size:12px;font-weight:650;border-radius:10px;letter-spacing:.5px}
+.usd-token{color:var(--blue);background:var(--blue-light)}
+.cny-token{color:#11816f;background:#eaf7f2}
+.fire-field{margin:16px 0 0}
+.fire-field-row{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:7px}
+.fire-field label{font-size:14px;font-weight:550;line-height:1.5}
+.fire-number{display:flex;align-items:center;gap:5px;min-width:122px;max-width:158px;flex-shrink:0;border:1px solid var(--border);border-radius:8px;background:white;min-height:37px;padding-right:9px}
+.fire-number input{width:77px;min-width:0;border:0;background:transparent;padding:7px 4px 7px 10px;font-size:16px;font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield;outline-offset:-3px}
+.fire-number input::-webkit-inner-spin-button,.fire-number input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.fire-number span{font-size:12px;color:var(--muted);white-space:nowrap}
+.fire-number:focus-within{border-color:#729eee;box-shadow:0 0 0 2px #1556d515}
+.fire-select{margin:17px 0 0}
+.fire-select label{display:block;font-size:14px;font-weight:550;margin:0 0 8px}
+.fire-select select{line-height:1.5}
+.fire-field.inactive,.fire-select.inactive{opacity:.45}
+.fire-field input:disabled,.fire-select select:disabled{cursor:default}
+.fire-quick-plan{padding:8px 26px 22px}
+.fire-quick-plan>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}
+.fire-quick-plan>p{font-size:13px;color:var(--muted);line-height:1.7;margin-top:17px}
+.retirement-milestone{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:25px;border:1px solid var(--border);border-radius:12px;background:white;padding:20px 25px}
+.retirement-milestone>div{min-width:0}
+.retirement-milestone span{display:block;color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:6px}
+.retirement-milestone strong{font-size:24px;line-height:1.4;font-weight:600;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.retirement-milestone small{font-size:13px;font-weight:400;color:var(--muted)}
+.retirement-milestone>p{font-size:14px;color:var(--muted);grid-column:1/-1}
+.fire-status{font-size:14px;line-height:1.85;padding:14px 18px;border:1px solid #cfe7dc;background:#f1faf5;color:#27624b;border-radius:10px}
+.fire-status[data-kind=warning]{border-color:#efd6b0;background:#fff8eb;color:#84571c}
+.fire-status[data-kind=neutral]{border-color:var(--border);background:#f8fafc;color:var(--muted)}
+.account-flow{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:13px;padding:15px;border:1px solid var(--border);border-radius:12px;background:white;font-size:14px;color:var(--muted)}
+.account-flow .flow-usd{background:var(--blue-light);color:var(--blue);font-weight:550;padding:8px 14px;border-radius:7px}
+.account-flow .flow-cny{background:#eaf7f2;color:#11816f;font-weight:550;padding:8px 14px;border-radius:7px}
+.fire-control-card .section-title{margin-bottom:18px}
+.fire-control-card .field-note{font-size:13px;margin-top:17px}
+.fire-section-row{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-top:8px}
+.fire-section-row h2{font-size:18px;font-weight:650}
+.fire-section-row>span{font-size:13px;color:var(--muted)}
+.flow-toggle{display:flex;border:1px solid var(--border);border-radius:8px;padding:3px;background:#f8fafc;flex-shrink:0}
+.flow-toggle button{border:0;background:transparent;color:var(--muted);font-size:13px;padding:6px 10px;border-radius:5px;cursor:pointer}
+.flow-toggle button[aria-pressed=true]{color:var(--blue);background:white;box-shadow:0 1px 3px #15213a12}
+.fire-rate-selection{display:grid;grid-template-columns:1fr 1.5fr;gap:25px;margin-top:9px}
+.fire-rate-selection label{font-size:14px;font-weight:550;display:block;margin-bottom:8px}
+.fire-ledger,.fire-method{padding:0 24px}
+.fire-ledger summary,.fire-method summary{display:flex;align-items:center;justify-content:space-between;list-style:none;font-size:14px;font-weight:550;padding:18px 0;cursor:pointer}
+.fire-ledger summary::-webkit-details-marker,.fire-method summary::-webkit-details-marker{display:none}
+.fire-ledger summary span,.fire-method summary span{font-size:18px;font-weight:400;color:var(--muted)}
+.fire-ledger[open] summary span,.fire-method[open] summary span{transform:rotate(45deg)}
+.fire-ledger>p{font-size:13px;color:var(--muted);line-height:1.7;margin:0 0 14px}
+.fire-ledger .table-scroll{margin:0 0 22px}
+.fire-method>div{padding:4px 0 20px;border-top:1px solid var(--border)}
+.fire-method p{margin-top:13px;font-size:14px;line-height:1.85;color:var(--muted)}
+.fire-footnote{padding:0 2px 4px}
+.fire-footnote p{font-size:12px;line-height:1.9;color:var(--muted);margin-top:5px}
+@media(max-width:1100px){.fire-metrics{gap:11px}.fire-metrics .metric{padding:18px 15px}.fire-metrics .metric-value{font-size:27px}.fire-control-card{padding:22px}.fire-number{min-width:115px}.fire-number input{width:70px}.fire-quick-plan{padding-left:22px;padding-right:22px}}
+@media(max-width:850px){.fire-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.fire-metrics .metric-value{font-size:31px}.fire-chart-panel{padding:21px}.fire-settings-grid{grid-template-columns:1fr}.fire-settings-grid .fire-control-card{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 25px}.fire-settings-grid .section-title,.fire-settings-grid .fire-select,.fire-settings-grid .field-note{grid-column:1/-1}.fire-accounts-grid{gap:15px}.account-heading{gap:9px}.account-heading p{font-size:12px}.retirement-milestone{gap:15px;padding:18px 20px}.retirement-milestone strong{font-size:21px}.fire-rate-selection{gap:18px}}
+@media(max-width:600px){.view-tabs{gap:0;margin-bottom:20px}.view-tabs button{font-size:14px;padding:12px 12px}.view-tabs button span{display:none}.fire-view-heading{align-items:flex-start}.fire-view-heading h2{font-size:20px}.fire-view-heading p{font-size:13px}.time-pill{font-size:12px;padding:7px 9px}.fire-metrics .metric-primary{grid-column:auto;display:block}.fire-metrics .metric-primary .metric-value{font-size:28px;margin:10px 0 9px}.fire-metrics .metric-value{font-size:28px}.fire-metrics .metric{padding:16px}.fire-metrics .metric h2{font-size:13px}.fire-metrics .metric-detail{font-size:12px}.fire-chart-panel{padding:18px 12px}.fire-chart-panel .chart-heading p{font-size:13px}.fire-chart-panel .chart-heading h2{font-size:16px}.fire-accounts-grid{grid-template-columns:1fr}.fire-control-card{padding:20px}.fire-settings-grid .fire-control-card{display:block}.fire-quick-plan{padding:4px 20px 20px}.fire-quick-plan>div{grid-template-columns:1fr;gap:0}.retirement-milestone{grid-template-columns:1fr;gap:13px}.retirement-milestone>div{display:flex;align-items:center;justify-content:space-between;gap:15px}.retirement-milestone strong{font-size:20px;text-align:right}.retirement-milestone small{font-size:12px}.retirement-milestone span{margin:0;max-width:53%}.fire-status{font-size:13px;padding:13px 15px}.account-flow{gap:8px;font-size:12px;padding:12px 8px}.account-flow .flow-usd,.account-flow .flow-cny{padding:7px 9px}.fire-rate-selection{grid-template-columns:1fr;gap:14px}.fire-ledger,.fire-method{padding:0 17px}.fire-section-row h2{font-size:16px}.fire-scrubber{padding:12px}.fire-number{min-width:122px}}

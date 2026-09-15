@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1556d5">
+  <meta name="description" content="人民币与美元双账户资产 Dashboard，模拟退休支取、通胀、汇率和分批补充，同时保留可拖动逐年收益率的复利计算器。">
+  <title>复利实验室 · 双账户资产与退休支取</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./retirement.css">
+  <script type="module" src="./app.mjs"></script>
+  <script type="module" src="./retirement.mjs"></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="page-header">
+      <div class="heading"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18V6M4 18h16M7 14l4-3 4 1 5-7"/></svg></span><div><h1>复利实验室</h1><p id="app-subtitle">双账户资产与退休支取</p></div></div>
+      <div class="header-end"><span class="unit-badge" id="app-unit">人民币 CNY · 美元 USD</span><button id="reset" class="text-button" type="button">重置参数</button></div>
+    </header>
+    <nav class="view-tabs" role="tablist" aria-label="计算器视图">
+      <button type="button" id="tab-dashboard" role="tab" aria-selected="true" aria-controls="dashboard-view" data-view="dashboard">Dashboard <span>双账户总览</span></button>
+      <button type="button" id="tab-retirement" role="tab" aria-selected="false" aria-controls="retirement-view" data-view="retirement" tabindex="-1">退休支取</button>
+      <button type="button" id="tab-compound" role="tab" aria-selected="false" aria-controls="compound-view" data-view="compound" tabindex="-1">单账户复利</button>
+    </nav>
+    <section id="dashboard-view" class="fire-view" role="tabpanel" aria-labelledby="tab-dashboard"></section>
+    <section id="retirement-view" class="fire-view" role="tabpanel" aria-labelledby="tab-retirement" hidden></section>
+    <section id="compound-view" role="tabpanel" aria-labelledby="tab-compound" hidden>
+    <div class="workspace">
+      <aside class="controls panel" aria-label="投资参数">
+        <div class="section-title"><h2>投入计划</h2><span>01</span></div>
+        <div class="field"><div class="field-row"><label for="principal">初始本金</label><div class="number-wrap"><input id="principal" type="number" min="0" max="100000" step="0.5" value="20"><span>万美元</span></div></div><input id="principal-slider" aria-label="初始本金滑块（万美元）" type="range" min="0" max="200" step="0.5" value="20"></div>
+        <div class="field"><div class="field-row"><label for="annual">每年投入</label><div class="number-wrap"><input id="annual" type="number" min="0" max="100000" step="0.5" value="10"><span>万美元</span></div></div><input id="annual-slider" aria-label="每年投入滑块（万美元）" type="range" min="0" max="100" step="0.5" value="10"></div>
+        <div class="field"><div class="field-row"><label for="years">投资年数</label><div class="number-wrap small"><input id="years" type="number" min="1" max="60" step="1" value="10"><span>年</span></div></div><input id="years-slider" aria-label="投资年数滑块（年）" type="range" min="1" max="60" step="1" value="10"></div>
+        <div class="field"><div class="field-row"><label for="contributionYears">持续投入</label><div class="number-wrap small"><input id="contributionYears" type="number" min="0" max="10" step="1" value="10"><span>年</span></div></div><input id="contributionYears-slider" aria-label="持续投入年数滑块" type="range" min="0" max="10" step="1" value="10"></div>
+        <div class="select-field"><label for="timing">投入时间</label><select id="timing"><option value="end">每年年底</option><option value="start">每年年初</option></select></div>
+        <div class="control-divider"></div>
+        <div class="section-title"><h2>收益情景</h2><span>02</span></div>
+        <div class="select-field"><label class="sr-only" for="preset">收益情景</label><select id="preset"><option value="alternate">好年份、低收益年份交替</option><option value="fixed">每年固定收益</option><option value="periodic">每 5 年出现一次回调</option><option value="early">前两年回调</option><option value="late">最后两年回调</option><option value="custom">自定义逐年收益</option></select></div>
+        <div class="field compact"><div class="field-row"><label for="good">好年份收益</label><div class="number-wrap small"><input id="good" type="number" min="-100" max="100" step="0.1" value="15"><span>%</span></div></div><input id="good-slider" aria-label="好年份收益滑块" type="range" min="-100" max="100" step="0.5" value="15"></div>
+        <div class="field compact"><div class="field-row"><label for="low">低收益年份</label><div class="number-wrap small"><input id="low" type="number" min="-100" max="100" step="0.1" value="2.5"><span>%</span></div></div><input id="low-slider" aria-label="低收益年份滑块" type="range" min="-100" max="100" step="0.5" value="2.5"></div>
+        <div class="field compact"><div class="field-row"><label for="downturn">回调年份收益</label><div class="number-wrap small"><input id="downturn" type="number" min="-100" max="100" step="0.1" value="-20"><span>%</span></div></div><input id="downturn-slider" aria-label="回调年份收益滑块" type="range" min="-100" max="100" step="0.5" value="-20"></div>
+        <div class="field compact"><div class="field-row"><label for="baseline">固定收益对照</label><div class="number-wrap small"><input id="baseline" type="number" min="-100" max="100" step="0.1" value="15"><span>%</span></div></div><input id="baseline-slider" aria-label="固定收益对照滑块" type="range" min="-100" max="100" step="0.5" value="15"></div>
+        <p id="preset-note" class="field-note">第 1 年为好年份，随后与低收益年份交替。</p>
+      </aside>
+      <div class="results">
+        <div class="metrics" aria-label="测算结果">
+          <section class="metric metric-primary"><h2>期末总资产 <span>万美元</span></h2><p class="metric-value" id="total">—</p><p class="metric-detail">累计投入 <strong id="invested">—</strong> 万美元</p></section>
+          <section class="metric"><h2>累计盈利 <span>万美元</span></h2><p class="metric-value" id="profit">—</p><p class="metric-detail">盈利 ÷ 投入 <strong id="roi">—</strong></p></section>
+          <section class="metric"><h2>路径复合年化</h2><p class="metric-value" id="cagr">—</p><p class="metric-detail">资金加权年化 <strong id="irr">—</strong></p></section>
+        </div>
+        <section class="chart-card panel" aria-labelledby="growth-title">
+          <div class="chart-heading"><div><h2 id="growth-title">资产增长曲线</h2><p id="growth-caption">年末资产 · 收益再投资</p></div><span id="horizon-badge" class="soft-badge">10 年</span></div>
+          <div class="legend"><span><i class="legend-line dynamic"></i>动态收益资产</span><span><i class="legend-line baseline"></i><span id="baseline-legend">固定 15% 对照</span></span><span><i class="legend-line principal"></i>累计投入本金</span></div>
+          <div id="growth-chart" class="growth-chart"></div>
+          <div class="horizon-control">
+            <div class="horizon-heading"><label for="chart-years-slider">投资年数 <span>左右拖动，查看不同年数的收益</span></label><output id="chart-years-value" for="chart-years-slider">10 年</output></div>
+            <input id="chart-years-slider" type="range" min="1" max="60" step="1" value="10" aria-describedby="horizon-readout">
+            <div class="horizon-scale" aria-hidden="true"><span>1 年</span><span>15 年</span><span>30 年</span><span>45 年</span><span>60 年</span></div>
+            <p id="horizon-readout" class="horizon-readout"></p>
+          </div>
+          <div class="comparison-strip" id="comparison">—</div>
+        </section>
+        <section class="editor-card panel" aria-labelledby="editor-title">
+          <div class="chart-heading"><div><h2 id="editor-title">逐年收益率</h2><p>上下拖动圆点，看看收益发生的顺序如何改变结果。</p></div><span class="soft-badge" id="scenario-badge">好坏年份交替</span></div>
+          <div id="rate-chart" class="rate-chart"></div>
+          <div class="year-editor"><div><label for="selected-year">精确选择年份</label><select id="selected-year"></select></div><div><label for="selected-rate">该年收益率</label><div class="rate-input-row"><input id="selected-rate-slider" type="range" min="-100" max="100" step="0.1" value="15" aria-label="选中年份收益率滑块"><div class="number-wrap small"><input id="selected-rate" type="number" min="-100" max="100" step="0.1" value="15"><span>%</span></div></div></div></div>
+          <p class="editor-hint">支持触屏拖动，也可选中圆点后用 ↑ ↓ 调整 0.5 个百分点。</p>
+        </section>
+        <details class="method panel"><summary>计算口径与逐年明细 <span>＋</span></summary><div class="method-content"><p>金额单位为万美元。年末投入：当年末资产 = 上年末资产 ×（1 + 当年收益率）+ 当年投入；年初投入则先加投入再计算收益。停止定投后，已有资产继续复利增长。</p><p>累计盈利 = 期末资产 − 累计投入；盈利 ÷ 投入是累计比例。路径复合年化按各年收益因子的几何平均计算，不计入外部定投。资金加权年化（IRR）考虑每笔投入的时间，代表这组现金流的年化回报；没有可衡量的持有期时显示“—”。</p><div class="table-scroll"><table><caption class="sr-only">每年收益、投入和资产明细，金额单位万美元</caption><thead><tr><th>年份</th><th>收益率</th><th>当年投入</th><th>当年盈亏</th><th>累计投入</th><th>动态资产</th><th>固定对照</th></tr></thead><tbody id="year-table"></tbody></table></div></div></details>
+      </div>
+    </div>
+    <footer><p>2%–3% 仍是正收益；模拟下跌可选择回调情景，或把某年拖到零以下。</p><p>情景测算 · 收益再投资 · 未计税费与通胀 · 假设收益不代表未来表现</p></footer>
+    </section>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  </main>
+</body>
+</html>

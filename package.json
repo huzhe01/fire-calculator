@@ -1,0 +1,13 @@
+{
+  "name": "fire-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "人民币与美元双账户资产、复利与退休支取模拟器",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "python3 -m http.server 4176 --directory dist",
+    "check": "node scripts/check-site.mjs",
+    "test": "node tests/retirement-model.test.mjs"
+  }
+}
